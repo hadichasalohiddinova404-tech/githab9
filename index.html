@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChainEstate | Blockchain Ko'chmas Mulk Platformasi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <nav class="topbar">
+        <div class="brand">
+          <div class="brand-mark">CE</div>
+          <div>
+            <p>ChainEstate</p>
+            <span>Blockchain ko'chmas mulk registri</span>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <button class="ghost-button" data-scroll-to="workspace">Boshqaruv paneli</button>
+          <button class="primary-button" data-scroll-to="register">Yangi mulk qo'shish</button>
+        </div>
+      </nav>
+
+      <div class="hero-grid">
+        <section class="hero-copy">
+          <span class="eyebrow">Uy, yer va ofis uchun raqamli registr</span>
+          <h1>Ko'chmas mulkni blockchain asosida ro'yxatdan o'tkazing, tekshiring va xavfsiz o'tkazing.</h1>
+          <p>Mulk egasini tasdiqlash, sotish yoki boshqa shaxsga o'tkazish, hujjatlarni raqamli bloklarda saqlash, kirish huquqlarini boshqarish va to'liq tarixni ko'rish bitta tizimda jamlangan.</p>
+          <div class="hero-actions">
+            <button class="primary-button" data-scroll-to="register">Loyihani ishlatish</button>
+            <button class="ghost-button" data-scroll-to="history">Tarixni ko'rish</button>
+          </div>
+          <div class="hero-stats" id="heroStats"></div>
+        </section>
+
+        <aside class="hero-panel">
+          <div class="glow glow-one"></div>
+          <div class="glow glow-two"></div>
+          <div class="panel-card">
+            <div class="panel-header">
+              <span class="status-dot"></span>
+              <p>Blockchain node faol</p>
+            </div>
+            <h2>Real-time registr ledger</h2>
+            <ul class="feature-list">
+              <li>Mulkni ro'yxatdan o'tkazish va xesh yaratish</li>
+              <li>Ega verifikatsiyasi va risk nazorati</li>
+              <li>Transfer, sotuv va hujjat yuritish</li>
+              <li>Granular access control va audit trail</li>
+            </ul>
+            <div class="mini-chain" id="miniChain"></div>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <main class="workspace" id="workspace">
+      <section class="metrics-grid" id="metricsGrid"></section>
+
+      <section class="content-grid">
+        <div class="stack">
+          <article class="card" id="register">
+            <div class="section-heading">
+              <div>
+                <span class="eyebrow">1-bosqich</span>
+                <h3>Mulkni ro'yxatdan o'tkazish</h3>
+              </div>
+              <p>Uy, yer yoki ofisni egasi bilan blockchain ledgerga yozing.</p>
+            </div>
+            <form id="propertyForm" class="form-grid">
+              <label>
+                Mulk turi
+                <select name="type" required>
+                  <option value="Uy">Uy</option>
+                  <option value="Yer">Yer</option>
+                  <option value="Ofis">Ofis</option>
+                </select>
+              </label>
+              <label>
+                Mulk nomi
+                <input type="text" name="name" placeholder="Masalan, Chilonzor hovli" required>
+              </label>
+              <label class="full">
+                Manzil
+                <input type="text" name="address" placeholder="Toshkent shahri, Chilonzor tumani..." required>
+              </label>
+              <label>
+                Maydoni
+                <input type="text" name="area" placeholder="240 m² yoki 12 sotix" required>
+              </label>
+              <label>
+                Bozor narxi
+                <input type="number" min="0" name="price" placeholder="125000" required>
+              </label>
+              <label>
+                Egasi F.I.Sh.
+                <input type="text" name="ownerName" placeholder="Aliyev Azizbek" required>
+              </label>
+              <label>
+                Ega ID
+                <input type="text" name="ownerId" placeholder="AA1234567" required>
+              </label>
+              <label>
+                Telefon
+                <input type="text" name="ownerPhone" placeholder="+998 90 123 45 67" required>
+              </label>
+              <label class="full">
+                Qisqa tavsif
+                <textarea name="description" rows="3" placeholder="Mulkning holati, kommunikatsiyalar, hudud..." required></textarea>
+              </label>
+              <button class="primary-button full" type="submit">Blockchain ga yozish</button>
+            </form>
+          </article>
+
+          <article class="card">
+            <div class="section-heading">
+              <div>
+                <span class="eyebrow">2-bosqich</span>
+                <h3>Egasini tekshirish</h3>
+              </div>
+              <p>Owner identifikatsiyasi va hujjat mosligini tekshirib, statusni yangilang.</p>
+            </div>
+            <form id="verificationForm" class="form-grid">
+              <label>
+                Mulk
+                <select name="propertyId" id="verificationPropertySelect" required></select>
+              </label>
+              <label>
+                Tekshiruvchi tashkilot
+                <input type="text" name="verifier" placeholder="Davlat kadastr agentligi" required>
+              </label>
+              <label>
+                Natija
+                <select name="result" required>
+                  <option value="Tasdiqlandi">Tasdiqlandi</option>
+                  <option value="Qo'shimcha tekshiruv kerak">Qo'shimcha tekshiruv kerak</option>
+                  <option value="Rad etildi">Rad etildi</option>
+                </select>
+              </label>
+              <label class="full">
+                Izoh
+                <textarea name="notes" rows="3" placeholder="Hujjatlar va shaxs ma'lumotlari tekshiruv natijasi"></textarea>
+              </label>
+              <button class="secondary-button full" type="submit">Verifikatsiya holatini yozish</button>
+            </form>
+          </article>
+
+          <article class="card">
+            <div class="section-heading">
+              <div>
+                <span class="eyebrow">3-bosqich</span>
+                <h3>Sotish yoki o'tkazish</h3>
+              </div>
+              <p>Yangi egaga ownership transfer yarating va tranzaksiya tarixini saqlang.</p>
+            </div>
+            <form id="transferForm" class="form-grid">
+              <label>
+                Mulk
+                <select name="propertyId" id="transferPropertySelect" required></select>
+              </label>
+              <label>
+                Operatsiya turi
+                <select name="mode" required>
+                  <option value="Sotildi">Sotildi</option>
+                  <option value="Boshqa shaxsga o'tkazildi">Boshqa shaxsga o'tkazildi</option>
+                </select>
+              </label>
+              <label>
+                Yangi egasi
+                <input type="text" name="newOwnerName" placeholder="Karimova Madina" required>
+              </label>
+              <label>
+                Yangi ega ID
+                <input type="text" name="newOwnerId" placeholder="BB9876543" required>
+              </label>
+              <label>
+                Telefon
+                <input type="text" name="newOwnerPhone" placeholder="+998 91 321 00 11" required>
+              </label>
+              <label>
+                Summasi
+                <input type="number" min="0" name="amount" placeholder="150000" required>
+              </label>
+              <label class="full">
+                Bitim tafsiloti
+                <textarea name="notes" rows="3" placeholder="To'lov turi, notarial holat, bitim sanasi..." required></textarea>
+              </label>
+              <button class="primary-button full" type="submit">Transfer blokini yaratish</button>
+            </form>
+          </article>
+        </div>
+
+        <div class="stack">
+          <article class="card">
+            <div class="section-heading">
+              <div>
+                <span class="eyebrow">4-bosqich</span>
+                <h3>Hujjatlarni blockchain’da saqlash</h3>
+              </div>
+              <p>Hujjat nomi, turini va fayl mazmunini xesh bilan ledgerga ulang.</p>
+            </div>
+            <form id="documentForm" class="form-grid">
+              <label>
+                Mulk
+                <select name="propertyId" id="documentPropertySelect" required></select>
+              </label>
+              <label>
+                Hujjat turi
+                <select name="documentType" required>
+                  <option value="Kadastr hujjati">Kadastr hujjati</option>
+                  <option value="Oldi-sotdi shartnomasi">Oldi-sotdi shartnomasi</option>
+                  <option value="Egalik guvohnomasi">Egalik guvohnomasi</option>
+                  <option value="Notarial tasdiq">Notarial tasdiq</option>
+                </select>
+              </label>
+              <label>
+                Hujjat nomi
+                <input type="text" name="title" placeholder="Shartnoma #24" required>
+              </label>
+              <label class="full">
+                Hujjat mazmuni
+                <textarea name="content" rows="4" placeholder="PDF matni yoki hujjatning qisqacha nusxasi" required></textarea>
+              </label>
+              <button class="secondary-button full" type="submit">Hujjat blokini saqlash</button>
+            </form>
+          </article>
+
+          <article class="card">
+            <div class="section-heading">
+              <div>
+                <span class="eyebrow">5-bosqich</span>
+                <h3>Kirish huquqlarini belgilash</h3>
+              </div>
+              <p>Mulk ma'lumotlarini kimlar ko'ra olishini ro'yxatdan o'tkazing.</p>
+            </div>
+            <form id="accessForm" class="form-grid">
+              <label>
+                Mulk
+                <select name="propertyId" id="accessPropertySelect" required></select>
+              </label>
+              <label>
+                Ruxsat beriladigan rol
+                <select name="role" required>
+                  <option value="Davlat organi">Davlat organi</option>
+                  <option value="Notarius">Notarius</option>
+                  <option value="Bank">Bank</option>
+                  <option value="Sotib oluvchi">Sotib oluvchi</option>
+                  <option value="Broker">Broker</option>
+                </select>
+              </label>
+              <label>
+                Subyekt nomi
+                <input type="text" name="party" placeholder="Kapitalbank yoki Broker Group" required>
+              </label>
+              <label>
+                Daraja
+                <select name="scope" required>
+                  <option value="Faqat ko'rish">Faqat ko'rish</option>
+                  <option value="Ko'rish va yuklab olish">Ko'rish va yuklab olish</option>
+                  <option value="To'liq audit">To'liq audit</option>
+                </select>
+              </label>
+              <button class="secondary-button full" type="submit">Access policy yozish</button>
+            </form>
+          </article>
+
+          <article class="card spotlight">
+            <div class="section-heading">
+              <div>
+                <span class="eyebrow">Live Dashboard</span>
+                <h3>Mulklar ro'yxati</h3>
+              </div>
+              <p>Blockchain registrida saqlangan aktivlar va ularning joriy holati.</p>
+            </div>
+            <div id="propertyGrid" class="property-grid"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="history-layout" id="history">
+        <article class="card">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">Audit trail</span>
+              <h3>Blockchain tranzaksiyalar tarixi</h3>
+            </div>
+            <p>Har bir operatsiya hash bilan bog'langan blok sifatida saqlanadi.</p>
+          </div>
+          <div id="ledgerTimeline" class="timeline"></div>
+        </article>
+
+        <article class="card">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">Inspector</span>
+              <h3>Tanlangan mulk tafsilotlari</h3>
+            </div>
+            <p>Hujjatlar, access control, verifikatsiya va transfer tarixini ko'ring.</p>
+          </div>
+          <div id="propertyInspector" class="inspector empty-state">Mulk kartasini tanlang, tafsilotlar shu yerda chiqadi.</div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
